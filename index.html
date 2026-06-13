@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsha Raj — Development Management & Rural Livelihoods Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#1e3a8a;
+    --sage-deep:#1e40af;
+    --earth:#0ea5e9;
+    --earth-soft:#38bdf8;
+    --cream:#f0f9ff;
+    --paper:#ffffff;
+    --ink:#1e293b;
+    --muted:#475569;
+    --line:#e0f2fe;
+    --accent:#0284c7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
 
+  /* ===== Layout shell ===== */
+  .shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh;}
+  @media (max-width:920px){.shell{grid-template-columns:1fr;}}
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    background:var(--sage-deep);
+    color:#cbd5e1;
+    padding:36px 28px;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    gap:34px;
+    overflow-y:auto;
+  }
+  @media (max-width:920px){
+    .sidebar{position:relative;height:auto;flex-direction:row;align-items:center;justify-content:space-between;padding:18px 24px;gap:0;}
+    .sidebar .side-nav, .sidebar .side-foot{display:none;}
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand img{
+    width:64px;height:64px;border-radius:50%;
+    object-fit:cover;border:2px solid var(--earth);
+  }
+  @media (max-width:920px){.brand img{width:44px;height:44px;}}
+  .brand-name{font-size:1.05rem;font-weight:600;color:#fff;letter-spacing:.02em;}
+  .brand-role{font-size:.72rem;color:var(--earth-soft);text-transform:uppercase;letter-spacing:.12em;margin-top:2px;}
+
+  .side-nav{display:flex;flex-direction:column;gap:4px;flex:1;}
+  .side-nav a{
+    display:flex;align-items:center;gap:12px;
+    color:#94a3b8;text-decoration:none;
+    font-size:.85rem;font-weight:500;
+    padding:10px 12px;border-radius:8px;
+    border-left:2px solid transparent;
+    transition:.2s;
+  }
+  .side-nav a:hover, .side-nav a.active{
+    color:#fff;background:rgba(14,165,233,.1);
+    border-left:2px solid var(--earth);
+  }
+  .side-nav .num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--earth);}
+
+  .side-foot{font-size:.74rem;color:#64748b;border-top:1px solid rgba(255,255,255,.08);padding-top:18px;}
+  .side-foot a{color:var(--earth-soft);text-decoration:none;}
+  .side-foot div{margin-bottom:6px;}
+
+  /* ===== Main ===== */
+  main{padding:0;}
+  section{padding:64px 56px;border-bottom:1px solid var(--line);}
+  section > *{max-width:1100px;margin-left:auto;margin-right:auto;}
+  @media (max-width:920px){section{padding:44px 22px;}}
+  section:last-of-type{border-bottom:none;}
+  @media (min-width:1500px){
+    .shell{grid-template-columns:280px 1fr;}
+    section{padding:72px 80px;}
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--earth);font-weight:500;margin-bottom:10px;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    background:linear-gradient(135deg,var(--sage) 0%,var(--sage-deep) 100%);
+    color:#fff;position:relative;overflow:hidden;
+    padding:72px 56px;
+  }
+  @media (max-width:920px){.hero{padding:48px 22px;}}
+  .hero::before{
+    content:'';position:absolute;top:-120px;right:-120px;
+    width:380px;height:380px;border-radius:50%;
+    background:radial-gradient(circle,rgba(212,165,116,.18),transparent 70%);
+  }
+  .hero-grid{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end;position:relative;z-index:1;}
+  .hero-title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;letter-spacing:-.01em;line-height:1.04;}
+  .hero-title em{font-style:italic;color:var(--earth-soft);}
+  .hero-tagline{
+    margin-top:14px;font-size:1.05rem;color:#cbd5e1;max-width:560px;font-weight:300;
+  }
+  .hero-tagline strong{color:#fff;font-weight:600;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:32px;}
+  .hero-meta a, .hero-meta span{
+    color:#e0f2fe;text-decoration:none;font-size:.88rem;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hero-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--earth);}
+
+  .hero-stat{
+    margin-left:auto;text-align:right;
+  }
+  .hero-stat .num{font-size:3.6rem;font-weight:700;font-family:'Playfair Display',serif;color:var(--earth-soft);line-height:1;}
+  .hero-stat .label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:#bae6fd;margin-top:6px;}
+  @media (max-width:920px){.hero-stat{margin-left:0;text-align:left;}}
+
+  /* ===== Vision band ===== */
+  .vision{
+    background:var(--sage);color:#fff;
+    display:flex;gap:24px;align-items:center;flex-wrap:wrap;
+    padding:40px 56px;
+  }
+  @media (max-width:920px){.vision{padding:32px 22px;flex-direction:column;align-items:flex-start;}}
+  .vision .icon{
+    flex:0 0 auto;width:54px;height:54px;border-radius:14px;
+    background:rgba(212,165,116,.15);display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(212,165,116,.4);
+  }
+  .vision .icon{font-size:2rem;}
+  .vision p{color:#cbd5e1;font-size:1rem;max-width:880px;font-weight:300;}
+
+  /* ===== Section Head ===== */
+  .sec-head{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:44px;flex-wrap:wrap;gap:18px;
+  }
+  .sec-head h2{
+    font-size:2rem;font-weight:600;color:var(--sage);letter-spacing:-.01em;
+  }
+  .sec-head .count{
+    font-size:.85rem;color:var(--earth);font-weight:500;text-transform:uppercase;letter-spacing:.08em;
+  }
+
+  /* ===== Timeline ===== */
+  .timeline{display:flex;flex-direction:column;gap:36px;}
+  .tl-item{
+    padding-left:32px;border-left:2px solid var(--line);position:relative;
+  }
+  .tl-item::before{
+    content:'';position:absolute;left:-8px;top:0;
+    width:14px;height:14px;border-radius:50%;
+    background:var(--earth);border:3px solid var(--paper);
+  }
+  .tl-item.current::before{background:var(--sage);}
+  .tl-period{
+    font-family:'JetBrains Mono',monospace;font-size:.78rem;
+    color:var(--earth);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .tl-role{
+    font-size:1.1rem;font-weight:600;color:var(--sage);margin-top:6px;
+  }
+  .tl-org{
+    font-size:.95rem;color:var(--muted);font-weight:500;margin-top:4px;
+  }
+  .tl-detail{font-size:.9rem;color:var(--ink);max-width:760px;}
+  .tl-toggle{
+    background:none;border:none;color:var(--earth);cursor:pointer;
+    font-size:.85rem;font-weight:600;margin-top:10px;padding:0;
+    text-transform:uppercase;letter-spacing:.06em;transition:.2s;
+  }
+  .tl-toggle:hover{color:var(--sage);}
+  .tl-more{
+    display:none;list-style:none;margin-top:12px;padding:0;
+  }
+  .tl-more.show{display:flex;flex-direction:column;gap:8px;}
+  .tl-more li{font-size:.88rem;color:var(--muted);padding-left:12px;}
+  .tl-more li::before{content:'•';margin-right:8px;color:var(--earth);}
+
+  /* ===== Platforms/Tools Grid ===== */
+  .plat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:860px){.plat-grid{grid-template-columns:1fr;}}
+  .plat-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    padding:28px;
+  }
+  .plat-card h3{
+    font-size:.95rem;font-weight:600;color:var(--sage);
+    margin-bottom:14px;letter-spacing:.05em;
+  }
+  .plat-card ul{list-style:none;}
+  .plat-card li{
+    font-size:.85rem;color:var(--ink);padding:6px 0;
+  }
+  .plat-card li::before{
+    content:'•';color:var(--earth);margin-right:8px;font-size:.7rem;
+  }
+
+  /* ===== Two Col Grid ===== */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+  @media (max-width:860px){.twocol{grid-template-columns:1fr;}}
+
+  /* ===== Cards ===== */
+  .community-card, .award-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:12px;
+    padding:24px;border-left:4px solid var(--earth);
+  }
+  .community-card h4, .award-card h4{
+    font-size:.95rem;font-weight:600;color:var(--sage);margin-bottom:12px;
+  }
+  .community-card ul, .award-card ul{list-style:none;}
+  .community-card li, .award-card li{
+    font-size:.85rem;color:var(--ink);padding:6px 0;margin-left:0;
+  }
+  .community-card li::before, .award-card li::before{
+    content:'•';color:var(--earth);margin-right:8px;
+  }
+
+  /* ===== Footer Grid ===== */
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:32px;}
+  @media (max-width:860px){.footer-grid{grid-template-columns:1fr;}}
+
+  /* ===== Strengths/Skills ===== */
+  .strengths{
+    display:grid;gap:12px;align-content:flex-start;
+  }
+  .strength-chip{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(74,143,111,.08);border:1px solid rgba(74,143,111,.2);
+    padding:10px 14px;border-radius:20px;
+    font-size:.82rem;color:var(--sage);font-weight:500;
+    width:fit-content;
+  }
+  .strength-chip .dot{width:4px;height:4px;border-radius:50%;background:var(--earth);}
+
+  /* ===== Reveal animation ===== */
+  .reveal{animation:reveal .6s ease forwards;}
+  @keyframes reveal{
+    0%{opacity:0;transform:translateY(12px);}
+    100%{opacity:1;transform:translateY(0);}
+  }
+
+  /* ===== Utility ===== */
+  a{color:var(--earth);text-decoration:none;transition:.2s;}
+  a:hover{color:var(--sage);}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Harsha Raj" onerror="this.style.display='none'">
+      <div>
+        <div class="brand-name">Harsha Raj</div>
+        <div class="brand-role">Development Management</div>
+      </div>
+    </div>
+
+    <nav class="side-nav">
+      <a href="#vision"><span class="num">01</span> Vision</a>
+      <a href="#journey"><span class="num">02</span> Internships</a>
+      <a href="#professional"><span class="num">03</span> Experience</a>
+      <a href="#domain"><span class="num">04</span> Domain</a>
+      <a href="#platforms"><span class="num">05</span> Skills</a>
+      <a href="#recognition"><span class="num">06</span> Recognition</a>
+      <a href="#community"><span class="num">07</span> Community</a>
+      <a href="#education"><span class="num">08</span> Education</a>
+    </nav>
+
+    <div class="side-foot">
+      <div>📧 <a href="mailto:harsharaj.pdm11023@dmi.ac.in">harsharaj.pdm11023@dmi.ac.in</a></div>
+      <div>📱 <a href="tel:+917209153547">+91 7209153547</a></div>
+      <div>🔗 <a href="https://www.linkedin.com/in/harsharaj-a152a4223/" target="_blank" rel="noopener">LinkedIn</a></div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">Harsha Raj</h1>
+          <p style="font-size:0.9rem;color:#cbd5e1;margin-top:8px;font-weight:500;">Placed as District Mission Manager (Young Professional) · Department of Rural Development, Govt. of Bihar</p>
+          <p class="hero-tagline" style="margin-top:20px;font-size:0.95rem;">
+            As a Development Management participant from Development Management Institute, Patna, 
+            I am driven by a commitment to empowering rural communities, strengthening livelihoods, 
+            and advancing inclusive development through sustainable solutions, participatory governance, 
+            and evidence-based program design.
+          </p>
+          <div class="hero-meta" style="margin-top:24px;">
+            <span><span class="dot"></span> Development Management Institute, Patna</span>
+            <span><span class="dot"></span> Patna, Bihar</span>
+            <a href="https://www.linkedin.com/in/harsha-raj-a152a4223/" target="_blank" rel="noopener"><span class="dot"></span> LinkedIn</a>
+          </div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">5</div>
+          <div class="label">Key Projects</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISION -->
+    <section class="vision">
+      <div>
+      <div class="eyebrow" style="margin-bottom:6px;">👁️ Vision</div>
+      <p>
+        To drive <strong>inclusive rural development and sustainable livelihoods</strong> through participatory governance, 
+        evidence-based program design, and community-centric strategies — empowering marginalized communities, 
+        strengthening local institutions, and fostering collaborative partnerships that advance social resilience, 
+        economic opportunity, and long-term sustainable growth across underserved regions.
+      </p>
+      </div>
+    </section>
+
+    <!-- INTERNSHIPS & PROJECTS -->
+    <section id="journey">
+      <div class="sec-head">
+        <h2>Internships &amp; Development Projects</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item current reveal">
+          <div class="tl-period">Sep 2025 — Present</div>
+          <div class="tl-role">Management Internship Intern</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Mulkanoor Women's Cooperative Dairy (Mulkanur Dairy) · Warangal District, Telangana</div>
+          <div class="tl-detail">Conducting live market research and competitive analysis for dairy sector B2B/B2C segments. Designing customer-centric strategies, engaging stakeholders, and leveraging field insights for actionable market expansion recommendations.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Conducting Live Market Research and Competitive Analysis across dairy products.</li>
+            <li>Designing customer-centric strategies for milk and value-added products (curd, ghee, paneer, khoya).</li>
+            <li>Engaging with B2B distributors and B2C consumers to enhance sales and marketing.</li>
+            <li>Leveraging data-driven analysis for market expansion and pricing strategies.</li>
+            <li>Supporting customer acquisition and competitive benchmarking initiatives.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-period">May 2025 — Jun 2025</div>
+          <div class="tl-role">Enterprise Learning (EL) Intern · Summer Project</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Saahaj Milk Producer Company Limited · Agra, Uttar Pradesh</div>
+          <div class="tl-detail">Field-based strategic study on rural dairy development, B2B/B2C market integration, and value chain innovation. Mapped dairy value chain, conducted market assessment using AHP and Pareto analysis, and engaged stakeholders in B2B and B2C segments.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Gained comprehensive exposure to dairy value chain — from village-level milk pooling to urban delivery.</li>
+            <li>Conducted market assessment (B2B vs. B2C) using AHP and Pareto analysis.</li>
+            <li>Engaged in field surveys with retailers, vendors, and household consumers.</li>
+            <li>Mapped cold chain logistics and daily operations at milk pooling centers.</li>
+            <li>Analyzed feedback to identify service gaps and improvement opportunities.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-period">Sep 2024 — Oct 2024</div>
+          <div class="tl-role">Development Immersion Intern</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Gram Chetna Andolan · Shrirampur, Sitamarhi, Bihar</div>
+          <div class="tl-detail">Socio-economic village profiling study documenting community challenges in education, healthcare, and water supply. Supported sustainable development initiatives and contributed to capacity-building activities and infrastructure planning.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Conducted community engagement to understand local development challenges.</li>
+            <li>Documented socio-economic profiles and village development data.</li>
+            <li>Assisted capacity-building activities and resource distribution.</li>
+            <li>Promoted cultural preservation through community events.</li>
+            <li>Applied field research and data analysis for evidence-based planning.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-period">Dec 2023 — Mar 2024</div>
+          <div class="tl-role">Govt Middle School Intern (As a Part of B.Ed)</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Rajakiye Madhya Vidyalaya Salha Mushari · Muzaffarpur</div>
+          <div class="tl-detail">Designed lesson plans and teaching aids tailored to diverse learners. Managed classrooms while fostering an inclusive, engaging environment and facilitated interactive learning strategies to enhance participation.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Designed lesson plans and teaching aids tailored to diverse learners.</li>
+            <li>Managed classrooms while fostering an inclusive, engaging environment.</li>
+            <li>Facilitated interactive learning strategies to enhance participation.</li>
+            <li>Collaborated with faculty and supported students in overcoming challenges.</li>
+            <li>Observed and understood the functioning of rural public education systems.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <section id="professional">
+      <div class="sec-head">
+        <h2>Professional Experience</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-period">Oct 2023 — Dec 2023</div>
+          <div class="tl-role">Customer Relations Executive</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Nissan · Bengaluru</div>
+          <div class="tl-detail">Managed multi-channel customer interactions and utilized CRM tools to resolve complaints and drive service improvements. Addressed customer concerns and supported retention strategies.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Managed multi-channel customer interactions (calls, emails, chat, in-person).</li>
+            <li>Utilized CRM tools to document feedback and resolve complaints.</li>
+            <li>Proactively addressed concerns and identified upselling opportunities.</li>
+            <li>Supported customer retention strategies and loyalty programs.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-period">Jun 2020 — Feb 2022 | Sep 2022 — Sep 2023</div>
+          <div class="tl-role">Academic Administrator &amp; HR Specialist</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Diksha International Public School · Patna</div>
+          <div class="tl-detail">Coordinated recruitment processes, managed student records and parent communication, and oversaw HR and administrative functions including leave management and compliance.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Coordinated recruitment processes, including CV screening, candidate shortlisting, and final selection with school management.</li>
+            <li>Managed student records, fee tracking, and parent communication, ensuring accuracy and timely follow-ups.</li>
+            <li>Oversaw HR and administrative functions such as employee records, leave management, compliance, and event coordination.</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-period">Mar 2022 — Aug 2022</div>
+          <div class="tl-role">HR &amp; Admin Executive</div>
+          <div class="tl-org" style="font-weight:700;color:var(--sage);margin-top:8px;">Taiyo Pharma · Mumbai</div>
+          <div class="tl-detail">Managed end-to-end recruitment and onboarding processes. Oversaw HR operations including employee records, leave management, timesheet compliance, and payroll coordination.</div>
+          <button class="tl-toggle" onclick="toggleMore(this)">+ Full responsibilities</button>
+          <ul class="tl-more">
+            <li>Managed end-to-end recruitment and onboarding processes, including candidate screening, interviews, offer letters, induction, and document compliance.</li>
+            <li>Oversaw HR operations, such as employee records, leave management, timesheet compliance, and payroll coordination with finance.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOMAIN EXPERTISE -->
+    <section id="domain">
+      <div class="sec-head">
+        <h2>Domain Expertise & Focus Areas</h2>
+      </div>
+      <div class="strengths reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-content:flex-start;">
+        <div class="strength-chip"><span class="dot"></span> Rural Development & Livelihoods</div>
+        <div class="strength-chip"><span class="dot"></span> Community Engagement & PRA</div>
+        <div class="strength-chip"><span class="dot"></span> Market Research & Analysis</div>
+        <div class="strength-chip"><span class="dot"></span> Cooperative Governance</div>
+        <div class="strength-chip"><span class="dot"></span> Sustainable Enterprises</div>
+        <div class="strength-chip"><span class="dot"></span> Program Design & M&E</div>
+        <div class="strength-chip"><span class="dot"></span> Socio-economic Profiling</div>
+        <div class="strength-chip"><span class="dot"></span> Data-Driven Decision Making</div>
+        <div class="strength-chip"><span class="dot"></span> Stakeholder Engagement</div>
+        <div class="strength-chip"><span class="dot"></span> CSR & Social Impact</div>
+        <div class="strength-chip"><span class="dot"></span> Field Research Methods</div>
+        <div class="strength-chip"><span class="dot"></span> Capacity Building</div>
+      </div>
+    </section>
+
+    <!-- SKILLS & TOOLS -->
+    <section id="platforms">
+      <div class="sec-head">
+        <h2>Skill Sets &amp; Tools</h2>
+      </div>
+      <div class="plat-grid">
+        <div class="plat-card reveal">
+          <h3>Soft Skills</h3>
+          <ul>
+            <li>Leadership &amp; Team Management</li>
+            <li>Effective Communication</li>
+            <li>Critical Thinking</li>
+            <li>Teamwork &amp; Collaboration</li>
+            <li>Time Management</li>
+            <li>Stakeholder Engagement</li>
+          </ul>
+        </div>
+        <div class="plat-card reveal">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li>Market Research &amp; Analysis</li>
+            <li>Participatory Rural Appraisal (PRA)</li>
+            <li>Pareto Analysis &amp; AHP</li>
+            <li>Field Research Methods</li>
+            <li>Data Analysis &amp; Visualization</li>
+            <li>CRM Systems (Nissan)</li>
+          </ul>
+        </div>
+        <div class="plat-card reveal">
+          <h3>Languages</h3>
+          <ul>
+            <li>English (Fluent)</li>
+            <li>Hindi (Native)</li>
+            <li>Urdu (Read, Write)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECOGNITION & AWARDS -->
+    <section id="recognition">
+      <div class="sec-head">
+        <h2>Recognition &amp; Certifications</h2>
+      </div>
+      <div class="twocol">
+        <div class="award-card reveal">
+          <h4>Professional Certifications</h4>
+          <ul>
+            <li>Human Resource Management — Great Learning</li>
+            <li>Human Resource Management — Udemy Learning</li>
+            <li>Basics of Training &amp; Leadership — UniAthena (Cambridge)</li>
+            <li>Essentials of Corporate Social Responsibility — UniAthena (Cambridge)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY LEADERSHIP -->
+    <section id="community">
+      <div class="sec-head" style="flex-direction:column;align-items:flex-start;">
+        <h2>Community Leadership &amp; Social Impact</h2>
+        <p style="font-weight:700;color:var(--sage);font-size:1rem;margin-top:-8px;">Building resilience and sustainable livelihoods through community-centric development and inclusive growth.</p>
+      </div>
+      <div class="twocol">
+        <div class="community-card reveal">
+          <h4>ORDI CSR Volunteer (Organization for Rare Diseases India)</h4>
+          <ul>
+            <li>Active supporter of the "Race for 7" marathon initiative.</li>
+            <li>Event coordination and community engagement for rare disease awareness.</li>
+            <li>Advocacy for marginalized health communities and inclusive healthcare access.</li>
+          </ul>
+        </div>
+        <div class="community-card reveal">
+          <h4>Rural Development &amp; Livelihoods Advocate</h4>
+          <ul>
+            <li>Passionate about strengthening rural communities and sustainable enterprises.</li>
+            <li>Focused on participatory governance and grassroots capacity building.</li>
+            <li>Committed to fostering inclusive growth and long-term socio-economic resilience.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="sec-head">
+        <h2>Education &amp; Academic Background</h2>
+      </div>
+      <div class="footer-grid" style="grid-template-columns:1fr;">
+        <div>
+          <div class="timeline">
+            <div class="tl-item reveal">
+              <div class="tl-period">2024 — 2026</div>
+              <div class="tl-role">Post Graduate Diploma in Development Management</div>
+              <div class="tl-org">Development Management Institute (DMI) · Patna</div>
+              <div class="tl-detail">GPA: 2.57/4 (Equivalent to 66.40%). Specialized coursework in rural development, livelihoods, governance systems, community engagement, and sustainable development.</div>
+            </div>
+            <div class="tl-item reveal">
+              <div class="tl-period">2022 — 2024</div>
+              <div class="tl-role">Bachelor of Education (B.Ed)</div>
+              <div class="tl-org">Bihar University · Muzaffarpur</div>
+              <div class="tl-detail">Marks: 83%. Focused on educational administration, inclusive teaching practices, and student-centered learning approaches.</div>
+            </div>
+            <div class="tl-item reveal">
+              <div class="tl-period">2014 — 2017</div>
+              <div class="tl-role">Bachelor of Computer Application (BCA)</div>
+              <div class="tl-org">Bihar University · Muzaffarpur</div>
+              <div class="tl-detail">Marks: 78%. Provided foundational technical knowledge and analytical thinking skills.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function toggleMore(btn){
+    const list = btn.nextElementSibling;
+    list.classList.toggle('show');
+    btn.textContent = list.classList.contains('show') ? '- Show less' : '+ Show full responsibilities';
+  }
+
+  // Scroll-spy for sidebar nav
+  const sectionsForNav = ['vision','journey','professional','domain','platforms','recognition','community','education'];
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sectionsForNav.forEach(id => {
+      const el = document.getElementById(id);
+      if(el && window.scrollY >= el.offsetTop - 200){
+        current = id;
+      }
+    });
+    document.querySelectorAll('.side-nav a').forEach(link => {
+      link.classList.remove('active');
+      if(link.getAttribute('href').includes(current)){
+        link.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
